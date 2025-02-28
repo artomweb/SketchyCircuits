@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@theme {
+  --font-patrick: "PatrickHand", "sans-serif";
+}
+
+@font-face {
+  font-family: "PatrickHand";
+  font-display: swap;
+  src: url("/fonts/PatrickHand-Regular.ttf") format("truetype");
+}
+
+#canvas {
+  /* Remove user-select: none or select-none class */
+  pointer-events: auto;
+}
+#canvas text {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}

@@ -1,29 +1,46 @@
-import { components } from "./main";
 import { getDistance } from "./utils";
 
-// Find the nearest node within a given threshold, optionally excluding a component
-export function findNearestNode(x, y, excludeComponent = null, threshold = 50) {
+export function findNearestNode(
+  components,
+  x,
+  y,
+  excludeComponent,
+  threshold = 20
+) {
   let nearestNode = null;
-  let minDistance = Infinity;
+  let minDistance = threshold;
 
-  components.forEach((comp) => {
-    if (comp !== excludeComponent) {
-      if (comp.node1) {
-        const d1 = getDistance(comp.node1, { x, y });
-        if (d1 < minDistance && d1 < threshold) {
-          minDistance = d1;
-          nearestNode = comp.node1;
-        }
+  components.forEach((component) => {
+    if (component === excludeComponent) return; // Skip the dragged component
+
+    // Check resistor nodes
+    if (component.type === "resistor" || component.type === "resistorZigZag") {
+      const node1 = component.node1;
+      const node2 = component.node2;
+
+      const dist1 = getDistance({ x, y }, node1);
+      if (dist1 < minDistance) {
+        minDistance = dist1;
+        nearestNode = node1;
       }
-      if (comp.node2) {
-        const d2 = getDistance(comp.node2, { x, y });
-        if (d2 < minDistance && d2 < threshold) {
-          minDistance = d2;
-          nearestNode = comp.node2;
-        }
+
+      const dist2 = getDistance({ x, y }, node2);
+      if (dist2 < minDistance) {
+        minDistance = dist2;
+        nearestNode = node2;
+      }
+    }
+    // Add label notch point
+    if (component.type === "label") {
+      const notch = { x: component.x, y: component.y }; // Label's notch point
+      const dist = getDistance({ x, y }, notch);
+      if (dist < minDistance) {
+        minDistance = dist;
+        nearestNode = notch;
       }
     }
   });
+
   return nearestNode;
 }
 // Define allowed lengths for snapping

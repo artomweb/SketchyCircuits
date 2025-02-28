@@ -6,9 +6,26 @@
     <title>Document</title>
     <script type="module" src="src/main.js"></script>
   </head>
-  <body class="flex justify-center h-screen">
-    <div
-      id="canvas"
-      class="border-2 border-dotted border-black w-[800px] h-[600px] rounded-xl"></div>
+  <body class="flex justify-center h-screen font-patrick flex-col select-none">
+    <div class="max-w-5xl mx-auto flex">
+      <div id="main-container" class="flex-shrink-0">
+        <div
+          id="canvas"
+          class="border-2 border-dotted border-black w-[800px] h-[600px] rounded-xl"></div>
+        <div class="mt-4 space-x-4">
+          <!-- <button
+            id="export-svg"
+            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+            Export as SVG
+          </button> -->
+          <button
+            id="export-png"
+            class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition cursor-pointer">
+            Export as PNG
+          </button>
+        </div>
+      </div>
+      <div id="toolbar" class="ml-4 w-[100px] h-[600px]"></div>
+    </div>
   </body>
 </html>
