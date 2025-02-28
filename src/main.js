@@ -827,7 +827,11 @@ document.getElementById("export-png").addEventListener("click", () => {
 
   img.src =
     "data:image/svg+xml;base64," +
-    btoa(unescape(encodeURIComponent(svgContent)));
+    btoa(
+      encodeURIComponent(svgContent).replace(/%([0-9A-F]{2})/g, (_, p1) =>
+        String.fromCharCode(parseInt(p1, 16))
+      )
+    );
 });
 
 function createComponentFromData(compData) {

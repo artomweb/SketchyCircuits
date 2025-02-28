@@ -1,6 +1,6 @@
 # Sketchy Circuits
 
-See it [here](https://sketchy.artomweb.com)
+See it [here](https://sketchy.artomweb.com) (desktop)
 
 ![alt text](image.png)
 ![](demo.gif)
